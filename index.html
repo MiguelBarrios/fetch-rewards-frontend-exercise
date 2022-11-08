@@ -9,11 +9,12 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <link rel="stylesheet" href="resources/css/style.css">
+        <link rel="stylesheet" href="resources/css/autocomplete.css">
     </head>
     <body>
 
         <div>
-            <form id="create-user-form">
+            <form id="create-user-form" autocomplete="off">
                 <div class="form-group">
                     <input id="input-fullname" type="text"  class="form-control" placeholder="Full Name">
                 </div>     
@@ -28,23 +29,22 @@
                 </div>
 
 
-                <div class="form-group">
-                    <input id="input-country" class="form-control" type="text" name="myCountry" placeholder="Country">
-                </div>
+                <div class="autocomplete form-group" style="width:300px;">
+                    <input id="input-state" type="text" name="states" placeholder="states">
+                  </div>
   
-                <div class="form-group">
-                    <input id="input-occupation" class="form-control" type="text" name="occupationInput" placeholder="Occupation">
-                </div>
+                  <div class="autocomplete form-group" style="width:300px;">
+                      <input id="input-occupation" type="text" name="occupation-input" placeholder="Occupation">
+                  </div>
+                  
                   
                 <input id="create-user-btn" type="submit" >
             </form>
 
-            </form>
+
         </div>
         
         <script src="resources/scripts/createUser.js"></script>
-        <script>
-            loadOccupationAndStateData();
-        </script>
+        <script src="resources/scripts/autocomplete.js"></script>
     </body>
 </html>
