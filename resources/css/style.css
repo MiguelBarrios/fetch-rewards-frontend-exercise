@@ -2,3 +2,46 @@
     visibility: hidden;
 }
 
+body{
+    background: #EFEFBB;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #D4D3DD, #EFEFBB);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #D4D3DD, #EFEFBB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+}
+  
+/* Center container in middle of page */
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+#create-user-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 4%;
+    padding: 5%;
+    background-color: white;
+}
+
+.errorsms{
+    color: red;
+}
+
+.form-group {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+
+.input-label {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
