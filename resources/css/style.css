@@ -17,6 +17,11 @@ body{
     min-height: 100vh;
 }
 
+#form-header {
+    font-size: xx-large;
+    padding: 4%;
+}
+
 #create-user-form{
     display: flex;
     flex-direction: column;
