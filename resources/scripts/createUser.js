@@ -1,3 +1,48 @@
+var createUserBtn = document.getElementById('create-user-btn');
+createUserBtn.addEventListener('click', function(e){
+    // Don't submit the form
+    e.preventDefault();
+    createNewUser();
+});
+
+function createNewUser(){
+    console.log("created new user");
+    let isFormComplete = checkIfFormIsComplete();
+
+
+
+}
+
+function checkIfFormIsComplete(){
+   let formComplete = true;
+
+  formComplete = validateField('input-fullname') && formComplete;
+  formComplete = validateField('input-email') && formComplete;
+  formComplete = validateField('input-password') && formComplete;
+  formComplete = validateField('input-state') && formComplete;
+  formComplete = validateField('input-occupation') && formComplete;
+  
+  return formComplete;
+}
+
+function validateField(elementId){
+    let field = document.getElementById(elementId).value;
+    let errorMessageId = elementId + '-error-message';
+    let valid = false;
+    
+    if(field.length > 0){
+      document.getElementById(errorMessageId).classList.add('hidden');
+      valid = true;
+    }else{
+      document.getElementById(errorMessageId).classList.remove('hidden');
+    }
+
+    return valid;
+}
+
+
+
+
 
 function sendCreateNewUserRequest(){
     let xhr = new XMLHttpRequest();

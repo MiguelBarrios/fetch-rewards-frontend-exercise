@@ -15,7 +15,6 @@ function loadOccupationAndStateData(){
                 states = data.states;
                 let stateNames = states.map(states => states.name);
                 occupations = data.occupations;
-                console.log("finished getting state data()")
                 autocomplete(document.getElementById("input-occupation"), occupations);
                 autocomplete(document.getElementById("input-state"), stateNames);
             }
@@ -31,7 +30,6 @@ function loadOccupationAndStateData(){
 
 // https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function autocomplete(inp, arr) {
-    console.log(arr);
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;

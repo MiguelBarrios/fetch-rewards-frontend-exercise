@@ -17,25 +17,30 @@
             <form id="create-user-form" autocomplete="off">
                 <div class="form-group">
                     <input id="input-fullname" type="text"  class="form-control" placeholder="Full Name">
+                    <small id="input-fullname-error-message" class="hidden form-text text-muted">*required value</small>
                 </div>     
                 
                 <div class="form-group">
                     <input id="input-email" type="email"  class="form-control"  placeholder="Email">
+                    <small id="input-email-error-message" class="hidden form-text text-muted">*required value</small>
                  </div>
                   
 
                 <div class="form-group">
                     <input id="input-password" type="password"  class="form-control"  placeholder="Password">
+                    <small id="input-password-error-message" class="hidden form-text text-muted">*required value</small>
                 </div>
 
 
-                <div class="autocomplete form-group" style="width:300px;">
+                <div class="autocomplete form-group" >
                     <input id="input-state" type="text" name="states" placeholder="states">
-                  </div>
+                    <small id="input-state-error-message" class="hidden form-text text-muted">*required value</small>
+                </div>
   
-                  <div class="autocomplete form-group" style="width:300px;">
-                      <input id="input-occupation" type="text" name="occupation-input" placeholder="Occupation">
-                  </div>
+                <div class="autocomplete form-group">
+                    <input id="input-occupation" type="text" name="occupation-input" placeholder="Occupation">
+                    <small id="input-occupation-error-message" class="hidden form-text text-muted">*required value</small>
+                </div>
                   
                   
                 <input id="create-user-btn" type="submit" >
