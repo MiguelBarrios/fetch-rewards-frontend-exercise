@@ -7,10 +7,15 @@ createUserBtn.addEventListener('click', function(e){
 
 function createNewUser(){
     console.log("created new user");
-    let isFormComplete = checkIfFormIsComplete();
-
-
-
+    let validForm = checkIfFormIsComplete();
+    if(validForm){
+      let userObject = createUserObject();
+      console.log(userObject)
+      sendCreateNewUserRequest(userObject);
+    }
+    else{
+      console.log("Invalid form");
+    }
 }
 
 function checkIfFormIsComplete(){
@@ -40,11 +45,30 @@ function validateField(elementId){
     return valid;
 }
 
+function createUserObject(){
+  let name = document.getElementById('input-fullname').value;
+  let email = document.getElementById('input-email').value;
+  let password = document.getElementById('input-password').value;
+  let occupation = document.getElementById('input-occupation').value;
+  let state = document.getElementById('input-state').value;
+
+  let userObj = {
+    name: name,
+    email: email,
+    password: password,
+    occupation: occupation,
+    state:  {
+      name: 'Alaska', 
+      abbreviation: 'AK'
+    }
+  }
+
+  return userObj;
+}
 
 
 
-
-function sendCreateNewUserRequest(){
+function sendCreateNewUserRequest(userObject){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://frontend-take-home.fetchrewards.com/form', true)
     xhr.setRequestHeader('Content-type', 'application/json');
@@ -53,7 +77,7 @@ function sendCreateNewUserRequest(){
         if (xhr.readyState === 4 ) {
           if ( xhr.status == 200 || xhr.status == 201 ) { 
             let data = JSON.parse(xhr.responseText);
-            console.log("Success")
+            console.log("Success: user " + userObject + " created");
             console.log(data);
           }
           else {
@@ -63,18 +87,6 @@ function sendCreateNewUserRequest(){
         }
     };
       
-    let userObject = {
-        "name": "Jimmathy A Smith",
-        "email": "jim@gmail.com",
-        "password": "password",
-        "occupation": "Head of Shrubbery",
-        "state": {
-            name: 'Alabama', 
-            abbreviation: 'AL'
-        }
-    };
-      
-    let userObjectJson = JSON.stringify(userObject); 
-      
+    let userObjectJson = JSON.stringify(userObject);   
     xhr.send(userObjectJson);
 }
