@@ -131,5 +131,17 @@ function autocomplete(inp, arr) {
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
-  });
+    });
+  }
+
+  function getState(stateName){
+    return states.find(state => state.name === stateName);
+  }
+
+  function validState(stateName){
+    return states.find(state => state.name === stateName);
+  }
+
+  function validOccupation(occupationName){
+      return occupations.find(occupation => occupation === occupationName);
   }

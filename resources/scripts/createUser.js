@@ -21,11 +21,27 @@ function createNewUser(){
 function checkIfFormIsComplete(){
    let formComplete = true;
 
+  // Check for empty fields
   formComplete = validateField('input-fullname') && formComplete;
   formComplete = validateField('input-email') && formComplete;
   formComplete = validateField('input-password') && formComplete;
   formComplete = validateField('input-state') && formComplete;
   formComplete = validateField('input-occupation') && formComplete;
+
+  // Check if valid state and occupation are given
+  let occupationName = document.getElementById('input-occupation').value;
+  let stateName = document.getElementById('input-state').value;
+
+  if(!validState(stateName)){
+    document.getElementById('input-state-error-message').classList.remove('hidden');
+  }
+
+  if(!validOccupation(occupationName)){
+    document.getElementById('input-occupation-error-message').classList.remove('hidden');
+  }
+
+
+
   
   return formComplete;
 }
@@ -50,20 +66,26 @@ function createUserObject(){
   let email = document.getElementById('input-email').value;
   let password = document.getElementById('input-password').value;
   let occupation = document.getElementById('input-occupation').value;
-  let state = document.getElementById('input-state').value;
+  let stateName = document.getElementById('input-state').value;
+  let state = getState(stateName);
 
   let userObj = {
     name: name,
     email: email,
     password: password,
     occupation: occupation,
-    state:  {
-      name: 'Alaska', 
-      abbreviation: 'AK'
-    }
+    state: state
   }
 
   return userObj;
+}
+
+function validState(state){
+  return state;
+}
+
+function validOccupation(){
+
 }
 
 
@@ -77,8 +99,10 @@ function sendCreateNewUserRequest(userObject){
         if (xhr.readyState === 4 ) {
           if ( xhr.status == 200 || xhr.status == 201 ) { 
             let data = JSON.parse(xhr.responseText);
-            console.log("Success: user " + userObject + " created");
-            console.log(data);
+            console.log("Success: user created");
+            $('#myModal').modal('show');
+            document.getElementById('user-fullname').textContent = data.name;
+            document.getElementById('user-id').textContent = 'user id: ' + data.id;
           }
           else {
             console.error("POST request failed.");
