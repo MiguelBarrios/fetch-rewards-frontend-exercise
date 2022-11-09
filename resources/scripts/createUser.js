@@ -6,59 +6,59 @@ createUserBtn.addEventListener('click', function(e){
 });
 
 function createNewUser(){
-    console.log("created new user");
-    let validForm = checkIfFormIsComplete();
-    if(validForm){
+    let formIsComplete = isFormComplete();
+    if(formIsComplete){
       let userObject = createUserObject();
-      console.log(userObject)
       sendCreateNewUserRequest(userObject);
-    }
-    else{
-      console.log("Invalid form");
     }
 }
 
-function checkIfFormIsComplete(){
-   let formComplete = true;
+let formComplete;
+function isFormComplete(){
 
+  formComplete = true;
   // Check for empty fields
-  formComplete = validateField('input-fullname') && formComplete;
-  formComplete = validateField('input-email') && formComplete;
-  formComplete = validateField('input-password') && formComplete;
-  formComplete = validateField('input-state') && formComplete;
-  formComplete = validateField('input-occupation') && formComplete;
+  isFieldEmpty('input-fullname');
+  isFieldEmpty('input-email');
+  isFieldEmpty('input-password');
+  isFieldEmpty('input-state');
+  isFieldEmpty('input-occupation');
 
   // Check if valid state and occupation are given
   let occupationName = document.getElementById('input-occupation').value;
   let stateName = document.getElementById('input-state').value;
 
   if(!validState(stateName)){
-    document.getElementById('input-state-error-message').classList.remove('hidden');
+    showInvalidInputMessage('input-state-error-message');
+    formComplete = false;
   }
 
   if(!validOccupation(occupationName)){
-    document.getElementById('input-occupation-error-message').classList.remove('hidden');
+    showInvalidInputMessage('input-occupation-error-message');
+    formComplete = false;
   }
 
-
-
-  
   return formComplete;
 }
 
-function validateField(elementId){
+function isFieldEmpty(elementId){
     let field = document.getElementById(elementId).value;
     let errorMessageId = elementId + '-error-message';
-    let valid = false;
     
-    if(field.length > 0){
-      document.getElementById(errorMessageId).classList.add('hidden');
-      valid = true;
+    if(field){
+      hideInvalidInputMessage(errorMessageId);
     }else{
-      document.getElementById(errorMessageId).classList.remove('hidden');
+      showInvalidInputMessage(errorMessageId);
+      formComplete = false;
     }
+}
 
-    return valid;
+function hideInvalidInputMessage(messageContainerId){
+  document.getElementById(messageContainerId).classList.add('hidden');
+}
+
+function showInvalidInputMessage(messageContainerId){
+  document.getElementById(messageContainerId).classList.remove('hidden');
 }
 
 function createUserObject(){
@@ -80,16 +80,6 @@ function createUserObject(){
   return userObj;
 }
 
-function validState(state){
-  return state;
-}
-
-function validOccupation(){
-
-}
-
-
-
 function sendCreateNewUserRequest(userObject){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://frontend-take-home.fetchrewards.com/form', true)
@@ -99,7 +89,6 @@ function sendCreateNewUserRequest(userObject){
         if (xhr.readyState === 4 ) {
           if ( xhr.status == 200 || xhr.status == 201 ) { 
             let data = JSON.parse(xhr.responseText);
-            console.log("Success: user created");
             $('#myModal').modal('show');
             document.getElementById('user-fullname').textContent = data.name;
             document.getElementById('user-id').textContent = 'user id: ' + data.id;
